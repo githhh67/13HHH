@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    android:paddingTop="16dp">
+
+    <!-- Header с месяцем и годом -->
+    <LinearLayout
+        android:id="@+id/calendarHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:paddingBottom="8dp"
+        android:gravity="center_vertical"
+        android:background="@color/white">
+
+        <ImageButton
+            android:id="@+id/btnPrevMonth"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_arrow_left"
+            android:contentDescription="Предыдущий месяц"
+            app:tint="@color/text_primary" />
+
+        <TextView
+            android:id="@+id/tvMonthYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Январь 2026"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/text_primary" />
+
+        <ImageButton
+            android:id="@+id/btnNextMonth"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_arrow_right"
+            android:contentDescription="Следующий месяц"
+            app:tint="@color/text_primary" />
+
+    </LinearLayout>
+
+    <!-- Дни недели -->
+    <LinearLayout
+        android:id="@+id/weekDaysContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/calendarHeader"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Пн"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Вт"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ср"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Чт"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Пт"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Сб"
+            android:textSize="14sp"
+            android:textColor="@color/accent_orange"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Вс"
+            android:textSize="14sp"
+            android:textColor="@color/accent_orange"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <!-- Календарь -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/calendarRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_below="@id/weekDaysContainer"
+        android:padding="4dp"
+        android:background="@color/white"
+        android:clipToPadding="false" />
+
+    <!-- Заголовок событий -->
+    <TextView
+        android:id="@+id/eventsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/calendarRecyclerView"
+        android:paddingStart="16dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="8dp"
+        android:text="События на 27 января 2026"
+        android:textSize="18sp"
+        android:textColor="@color/text_primary" />
+
+    <!-- Сообщение "Событий нет" -->
+    <TextView
+        android:id="@+id/tvNoEvents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/eventsHeader"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="Событий нет"
+        android:textSize="16sp"
+        android:textColor="@color/text_tertiary"
+        android:visibility="gone" />
+
+    <!-- Кнопка добавления события -->
+    <Button
+        android:id="@+id/btnAddEvent"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/tvNoEvents"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_add_event_bg"
+        android:text="+"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:gravity="center"
+        android:padding="0dp" />
+
+    <!-- Список событий -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCalendarEvents"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/eventsHeader"
+        android:layout_above="@id/bottomNavigation"
+        android:padding="8dp"
+        android:clipToPadding="false" />
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:elevation="8dp"
+        app:itemIconSize="25dp"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
+        app:labelVisibilityMode="labeled"
+        app:itemPaddingTop="7dp"
+        app:itemPaddingBottom="5dp"
+        app:menu="@menu/bottom_nav_menu" />
+
+</RelativeLayout>
